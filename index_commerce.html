@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Revenue Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 250px;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      input[type="number"], button {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>E-commerce Revenue Prediction</h2>
+
+<input id="quantity" type="number" placeholder="Quantity">
+<br>
+<input id="price" type="number" placeholder="Unit Price">
+<br>
+<input id="discount" type="number" placeholder="Discount">
+<br>
+<input id="category_code" type="number" placeholder="Category Code">
+<br><br>
+
+<button type="button" onclick="predict()">Predict</button>
+
+<h3 id="result"></h3>
+
+<script>
+function predict() {
+  const quantity = document.getElementById("quantity").value;
+  const price = document.getElementById("price").value;
+  const discount = document.getElementById("discount").value;
+  const category_code = document.getElementById("category_code").value;
+
+  fetch("http://127.0.0.1:5000/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      quantity: Number(quantity),
+      unit_price: Number(price),
+      discount: Number(discount),
+      category_code: Number(category_code)
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(data.predicted_revenue !== undefined){
+      document.getElementById("result").innerText = "Predicted Revenue: " + data.predicted_revenue;
+    } else {
+      document.getElementById("result").innerText = "Error: " + data.error;
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    document.getElementById("result").innerText = "Error connecting to server";
+  });
+}
+</script>
+
+</body>
+</html>

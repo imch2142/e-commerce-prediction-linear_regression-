@@ -1,0 +1,4 @@
+flask import Flask, request, jsonify
+flask_cors  CORS
+joblib
+numpy 
