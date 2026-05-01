@@ -1,53 +1,40 @@
-#   E-Commerce Customer Spending Prediction
+#   E-commerce Revenue Prediction Web App
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/ML-Linear_Regression-orange?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-An end-to-end Machine Learning project that uses **Linear Regression** to predict the annual amount spent by customers on an e-commerce platform based on their behavior and membership duration.
-
----
-
-##   Project Overview
-This project focuses on analyzing customer data to help an e-commerce company decide whether to focus their efforts on their mobile app or website. By leveraging **Mathematical Optimization** and **Linear Regression**, we identify the key factors that drive customer loyalty and spending.
-
-###   File Structure Breakdown
-*   **`regression.ipynb`**: Detailed Jupyter Notebook covering Data Analysis (EDA), visualization, and model training.
-*   **`ecommerce_model.pkl`**: The trained and serialized Linear Regression model, ready for production use.
-*   **`app.py`**: A Flask-based backend that serves the model to the web interface.
-*   **`index_commerce.html`**: A clean user interface for making real-time predictions.
-*   **`requirment.txt`**: List of dependencies needed to run the project.
+A web-based application that predicts e-commerce revenue in real-time. The project utilizes a **Linear Regression** model served via a **Flask API** and a clean, responsive interface for user interaction.
 
 ---
 
-##   Tech Stack
-*   **Modeling:** Python, Scikit-Learn, Pandas, NumPy.
-*   **Visualization:** Matplotlib, Seaborn.
-*   **Deployment:** Flask (Backend), HTML/CSS (Frontend).
-*   **Serialization:** Pickle (for saving the trained model).
+##   User Interface Overview
+The frontend is designed to be simple and user-friendly, allowing users to input transaction details and receive instant predictions.
+*   **Input Fields:** Quantity, Unit Price, Discount, and Category Code.
+*   **Technology:** Pure HTML5, CSS3 (with Flexbox), and Vanilla JavaScript (Fetch API).
+*   **Responsiveness:** Mobile-friendly design with media queries.
 
 ---
 
-##   Methodology
-1.  **Exploratory Data Analysis (EDA):** Visualizing correlations between features like "Time on App" and "Length of Membership".
-2.  **Model Training:** Implementing a Linear Regression model using the Ordinary Least Squares (OLS) method.
-3.  **Evaluation:** Assessing performance using metrics such as Mean Absolute Error (MAE) and R-squared.
-4.  **Deployment:** Creating a web form where users can input customer data to get an instant spending prediction.
+##   How it Works
+1.  **User Input:** The user enters features like `Quantity` and `Unit Price` in the HTML form.
+2.  **API Request:** JavaScript's `fetch()` function captures the data and sends a **POST** request to the Flask server (`/predict`) in JSON format.
+3.  **Model Inference:** The Backend (Flask) loads the trained `ecommerce_model.pkl` and performs the prediction.
+4.  **Display:** The predicted revenue is sent back to the browser and displayed dynamically without refreshing the page.
 
 ---
 
-##   How to Run
-1.  Install the required libraries:
-    ```bash
-    pip install -r requirment.txt
-    ```
-2.  Run the Flask application:
-    ```bash
-    python app.py
-    ```
-3.  Open your browser and navigate to `http://127.0.0.1:5000` to interact with the model.
+##   Project Structure
+*   **`index.html`**: The main interface containing the prediction form and the `predict()` JavaScript function.
+*   **`app.py`**: The Flask server that handles the `/predict` route and communicates with the ML model.
+*   **`ecommerce_model.pkl`**: The serialized Linear Regression model trained on e-commerce historical data.
+*   **`regression.ipynb`**: The data science notebook where the data was analyzed and the model was built.
 
 ---
 
-##   Insights
-Based on the coefficients of our Linear Regression model, we can determine exactly how much each additional minute spent on the app or year of membership contributes to the total revenue.
+##   Setup & Installation
+
+### 1. Backend Setup
+Ensure you have Python installed, then install the dependencies:
+```bash
+pip install flask flask-cors pandas scikit-learn
